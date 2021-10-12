@@ -14,29 +14,23 @@ Lamp lamp;
 BLYNK_WRITE(V0)
 {
   int value = param.asInt();
-  Serial.print("virtual pin =");
-  Serial.println(value); 
   switch (value) {
     case 0:
       lamp.off();
       lamp.switchAutoMode(false);
-      Serial.println("lamp Off"); 
       break;
     case 1:
       lamp.on();
       Serial.println("lamp On");
-      lamp.switchAutoMode(false);
       break;
     case 2:
       lamp.switchAutoMode(true);
-      Serial.println("lamp Auto");
       break;
   }
 }
 
 void setup()
 {
-  Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
   Lamp* lamp = new Lamp();
 }
