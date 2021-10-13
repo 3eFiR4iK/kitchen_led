@@ -18,19 +18,23 @@ BLYNK_WRITE(V0)
     case 0:
       lamp.off();
       lamp.switchAutoMode(false);
+      debug("lamp off");
       break;
     case 1:
       lamp.on();
-      Serial.println("lamp On");
+      lamp.switchAutoMode(false);
+      debug("lamp on");
       break;
     case 2:
       lamp.switchAutoMode(true);
+      debug("lamp Auto");
       break;
   }
 }
 
 void setup()
 {
+  Serial.begin(115200);
   Blynk.begin(auth, ssid, pass);
   Lamp* lamp = new Lamp();
 }
@@ -39,5 +43,13 @@ void loop()
 {
   Blynk.run();
   lamp.checkAutoMode();
+}
+
+
+void debug(char message[])
+{
+  if (DEBUG) {
+    Serial.println(message);
+  }
 }
   
