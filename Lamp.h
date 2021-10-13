@@ -52,12 +52,12 @@ public:
 	void on ()
 	{
 		if (analogRead(BRIGHTNESS_SENSOR_PIN) > 150) {
-			this->brigtness = 0;
+			this->brigtness = 1023;
 		} else {
-			this->brigtness = 130;
+			this->brigtness = 500;
 		}
 
-		for (int i = 255; i >= this->brigtness; i--) {
+		for (int i = 0; i <= this->brigtness; i++) {
 		  analogWrite(LAMP_PIN, i);
 		  delay(5);
 		}
@@ -67,7 +67,7 @@ public:
 
 	void off ()
 	{
-		for (int i = this->brigtness; i <= 255; i++) {
+		for (int i = this->brigtness; i >= 0; i--) {
 			analogWrite(LAMP_PIN, i);
 			delay(5);
 		}
